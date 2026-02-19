@@ -1,193 +1,855 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Colômbia 2026</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Colômbia 2026 — Nossa Jornada</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-<style>
+  <style>
+    :root{
+      --bg: #0b1220;
+      --bg2:#0f1a2e;
+      --card:#121f37cc;
+      --text:#e8eefc;
+      --muted:#b9c7e6;
+      --accent:#45c2ff;
+      --accent2:#ffd166;
+      --stroke: rgba(255,255,255,.12);
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+    /* Modo claro automático */
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f7f9fc;
+        --bg2:#ffffff;
+        --card:#ffffffcc;
+        --text:#0b1220;
+        --muted:#4a5568;
+        --accent:#0077b6;
+        --accent2:#ffb703;
+        --stroke: rgba(0,0,0,.10);
+        --shadow: 0 18px 50px rgba(0,0,0,.10);
+      }
+    }
 
-html {
-  scroll-behavior: smooth;
-}
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(69,194,255,.25), transparent 60%),
+        radial-gradient(900px 500px at 90% 10%, rgba(255,209,102,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+    }
 
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: #f8f9fa;
-  color: #333;
-}
+    /* Topbar */
+    .topbar{
+      position:fixed; inset:0 0 auto 0;
+      z-index:999;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.20));
+      border-bottom: 1px solid var(--stroke);
+    }
+    @media (prefers-color-scheme: light){
+      .topbar{ background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.55)); }
+    }
+    .nav{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 16px;
+      gap:12px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:600;
+      letter-spacing:.2px;
+      white-space:nowrap;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 4px rgba(69,194,255,.15);
+    }
+    .links{
+      display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end;
+      font-size:14px;
+    }
+    .links a{
+      color:var(--text);
+      text-decoration:none;
+      opacity:.92;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid transparent;
+      transition: .2s ease;
+    }
+    .links a:hover{
+      border-color: var(--stroke);
+      background: rgba(255,255,255,.06);
+      transform: translateY(-1px);
+    }
 
-/* MENU */
-nav {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  background: rgba(0,0,0,0.6);
-  padding: 15px;
-  text-align: center;
-  z-index: 1000;
-}
+    /* Hero */
+    header{
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      padding:90px 16px 40px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero{
+      max-width:1100px;
+      width:100%;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:22px;
+      align-items:center;
+    }
+    @media (max-width: 920px){
+      .hero{ grid-template-columns:1fr; }
+    }
 
-nav a {
-  color: white;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: 400;
-}
+    .hero-card{
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:22px;
+      position:relative;
+    }
+    @media (prefers-color-scheme: light){
+      .hero-card{ background: rgba(255,255,255,.72); }
+    }
 
-nav a:hover {
-  color: #00b4d8;
-}
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      font-size:13px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
 
-/* HERO */
-header {
-  height: 100vh;
-  background: url('https://images.unsplash.com/photo-1526403221461-7a7b3c88874d') center/cover no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: white;
-}
+    h1{
+      margin:10px 0 12px;
+      font-size:44px;
+      line-height:1.05;
+      letter-spacing:-.02em;
+    }
+    @media (max-width: 520px){
+      h1{ font-size:36px; }
+    }
+    .subtitle{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.6;
+    }
 
-header h1 {
-  font-size: 3rem;
-  background: rgba(0,0,0,0.5);
-  padding: 30px;
-  border-radius: 12px;
-}
+    .cta-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .btn{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      padding:10px 14px;
+      border-radius:12px;
+      font-weight:600;
+      font-size:14px;
+      transition:.2s ease;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      text-decoration:none;
+    }
+    .btn-primary{
+      color:#07111f;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 12px 30px rgba(69,194,255,.18);
+    }
+    .btn-primary:hover{ transform: translateY(-1px); }
+    .btn-ghost{
+      color:var(--text);
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--stroke);
+    }
+    .btn-ghost:hover{ transform: translateY(-1px); background: rgba(255,255,255,.10); }
 
-/* SEÇÕES */
-section {
-  padding: 100px 20px;
-  max-width: 1000px;
-  margin: auto;
-}
+    /* Countdown */
+    .countdown{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+    .pill{
+      border: 1px solid var(--stroke);
+      border-radius: 14px;
+      padding:10px 10px;
+      background: rgba(255,255,255,.05);
+      text-align:center;
+    }
+    @media (prefers-color-scheme: light){
+      .pill{ background: rgba(255,255,255,.70); }
+    }
+    .pill strong{
+      font-size:22px;
+      display:block;
+      line-height:1.05;
+    }
+    .pill span{
+      font-size:12px;
+      color:var(--muted);
+    }
 
-.alt {
-  background: white;
-}
+    /* Hero Gallery */
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 920px){
+      .hero-grid{ grid-template-columns:1fr 1fr; }
+    }
+    .photo{
+      border-radius: var(--radius);
+      overflow:hidden;
+      border:1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      background:#000;
+      min-height:160px;
+      position:relative;
+      transform: translateY(0);
+      transition:.25s ease;
+    }
+    .photo:hover{ transform: translateY(-2px); }
+    .photo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      opacity:.92;
+    }
+    .badge{
+      position:absolute;
+      left:12px; bottom:12px;
+      background: rgba(0,0,0,.55);
+      border: 1px solid rgba(255,255,255,.18);
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      color:#fff;
+      backdrop-filter: blur(6px);
+    }
 
-h2 {
-  text-align: center;
-  margin-bottom: 40px;
-  color: #0077b6;
-}
+    /* Sections */
+    main{ padding: 10px 0 60px; }
+    .section{
+      max-width:1100px;
+      margin:0 auto;
+      padding: 60px 16px;
+    }
+    .section h2{
+      margin:0 0 12px;
+      font-size:28px;
+      letter-spacing:-.01em;
+    }
+    .section p.lead{
+      margin:0 0 20px;
+      color:var(--muted);
+      line-height:1.7;
+      max-width: 78ch;
+    }
 
-.card {
-  background: #ffffff;
-  padding: 25px;
-  margin: 20px 0;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-}
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 840px){
+      .grid-2{ grid-template-columns:1fr; }
+    }
 
-.card h3 {
-  margin-top: 0;
-  color: #023e8a;
-}
+    .card{
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      padding:16px;
+    }
+    @media (prefers-color-scheme: light){
+      .card{ background: rgba(255,255,255,.78); }
+    }
 
-iframe {
-  width: 100%;
-  height: 400px;
-  border-radius: 15px;
-  border: none;
-}
+    .card h3{
+      margin:0 0 8px;
+      font-size:16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .meta{
+      font-size:12px;
+      color:var(--muted);
+      font-weight:400;
+      white-space:nowrap;
+    }
+    ul{
+      margin:10px 0 0 18px;
+      color:var(--muted);
+      line-height:1.7;
+    }
 
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 40px;
-  background: #023e8a;
-  color: white;
-}
+    /* Timeline */
+    .timeline{
+      display:grid;
+      gap:12px;
+      margin-top:10px;
+    }
+    .step{
+      display:grid;
+      grid-template-columns: 110px 1fr;
+      gap:12px;
+      align-items:start;
+      padding:14px;
+      border-radius: 16px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.04);
+    }
+    @media (prefers-color-scheme: light){
+      .step{ background: rgba(255,255,255,.65); }
+    }
+    .step .date{
+      font-weight:600;
+      color:var(--text);
+    }
+    .step .desc{
+      color:var(--muted);
+      line-height:1.6;
+    }
 
-</style>
+    /* Map */
+    .map-wrap iframe{
+      width:100%;
+      height:420px;
+      border:none;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border:1px solid var(--stroke);
+      background:#000;
+    }
+
+    /* Budget */
+    .budget{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){ .budget{ grid-template-columns:1fr; } }
+    .budget .big{
+      font-size:34px;
+      margin:0;
+      letter-spacing:-.02em;
+    }
+    .budget input{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 12px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      outline:none;
+      font-family: inherit;
+    }
+    @media (prefers-color-scheme: light){
+      .budget input{ background: rgba(255,255,255,.85); color:#0b1220; }
+    }
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 160px;
+      gap:10px;
+      align-items:center;
+      margin:10px 0;
+    }
+    @media (max-width:520px){
+      .row{ grid-template-columns: 1fr; }
+    }
+    .small{
+      font-size:12px; color:var(--muted);
+    }
+
+    /* Checklist */
+    .checklist{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top: 10px;
+    }
+    @media (max-width: 720px){ .checklist{ grid-template-columns: 1fr; } }
+    label.ck{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:12px;
+      border-radius: 14px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.04);
+      color:var(--muted);
+      cursor:pointer;
+      user-select:none;
+      transition:.2s ease;
+    }
+    @media (prefers-color-scheme: light){
+      label.ck{ background: rgba(255,255,255,.65); }
+    }
+    label.ck:hover{ transform: translateY(-1px); }
+    label.ck input{ margin-top:3px; }
+
+    /* Reveal animation */
+    .reveal{
+      opacity:0;
+      transform: translateY(10px);
+      transition: .6s ease;
+    }
+    .reveal.visible{
+      opacity:1;
+      transform: translateY(0);
+    }
+
+    footer{
+      padding: 40px 16px;
+      text-align:center;
+      color: var(--muted);
+      border-top: 1px solid var(--stroke);
+    }
+  </style>
 </head>
+
 <body>
 
-<nav>
-<a href="#cartagena">Cartagena</a>
-<a href="#sanandres">San Andrés</a>
-<a href="#medellin">Medellín</a>
-<a href="#mapa">Mapa</a>
-</nav>
+  <div class="topbar">
+    <div class="nav">
+      <div class="brand"><span class="dot"></span> Colômbia 2026</div>
+      <div class="links">
+        <a href="#rota">Rota</a>
+        <a href="#cartagena">Cartagena</a>
+        <a href="#sanandres">San Andrés</a>
+        <a href="#medellin">Medellín</a>
+        <a href="#mapa">Mapa</a>
+        <a href="#orcamento">Orçamento</a>
+        <a href="#checklist">Checklist</a>
+      </div>
+    </div>
+  </div>
 
-<header>
-<h1>Colômbia 2026<br>11–25 de Abril</h1>
-</header>
+  <header>
+    <div class="hero">
+      <div class="hero-card reveal">
+        <div class="kicker"><span class="dot"></span> viagem a dois • 11–25 de abril</div>
+        <h1>Cartagena, San Andrés e Medellín.</h1>
+        <p class="subtitle">
+          Um roteiro visual, leve e prático — com mapa, timeline, checklist e orçamento.
+          Chegada em Cartagena na noite do dia 11 ou madrugada do dia 12.
+        </p>
 
-<section id="cartagena">
-<h2>Cartagena (12–15 Abril)</h2>
+        <div class="countdown" aria-label="Contagem regressiva">
+          <div class="pill"><strong id="dd">—</strong><span>dias</span></div>
+          <div class="pill"><strong id="hh">—</strong><span>horas</span></div>
+          <div class="pill"><strong id="mm">—</strong><span>min</span></div>
+          <div class="pill"><strong id="ss">—</strong><span>seg</span></div>
+        </div>
 
-<div class="card">
-<h3>Centro Histórico</h3>
-<p>Cidade amuralhada, cores coloniais e pôr do sol no Caribe.</p>
-</div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#rota">Ver timeline</a>
+          <a class="btn btn-ghost" href="#mapa">Abrir mapa</a>
+        </div>
 
-<div class="card">
-<h3>Castillo San Felipe</h3>
-<p>Fortaleza histórica com vista panorâmica da cidade.</p>
-</div>
+        <p class="small" style="margin-top:12px;">
+          Dica: este site guarda checklist e orçamento no seu navegador (localStorage).
+        </p>
+      </div>
 
-<div class="card">
-<h3>Ilhas do Rosário</h3>
-<p>Passeio de lancha e mar cristalino.</p>
-</div>
+      <div class="hero-grid reveal">
+        <div class="photo">
+          <img alt="Cartagena" src="https://images.unsplash.com/photo-1585412727332-3c23b1d0be35?auto=format&fit=crop&w=1200&q=80">
+          <div class="badge">Cartagena</div>
+        </div>
+        <div class="photo">
+          <img alt="San Andrés" src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=80">
+          <div class="badge">San Andrés</div>
+        </div>
+        <div class="photo" style="grid-column: 1 / span 2; min-height: 220px;">
+          <img alt="Medellín" src="https://images.unsplash.com/photo-1583508915901-b5f84c1dcde1?auto=format&fit=crop&w=1400&q=80">
+          <div class="badge">Medellín</div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-</section>
+  <main>
 
-<section id="sanandres" class="alt">
-<h2>San Andrés (15–21 Abril)</h2>
+    <section class="section" id="rota">
+      <h2 class="reveal">Linha do tempo</h2>
+      <p class="lead reveal">Ajustada às suas datas: 3 noites em Cartagena, 6 noites em San Andrés e o restante em Medellín. Voo de volta no dia 24 à noite ou 25 bem cedo.</p>
 
-<div class="card">
-<h3>Volta à Ilha</h3>
-<p>Carrinho de golfe explorando praias e mirantes.</p>
-</div>
+      <div class="timeline">
+        <div class="step reveal">
+          <div class="date">11/abr</div>
+          <div class="desc">Voo saindo do Brasil. Chegada em Cartagena no fim do dia ou madrugada do dia 12.</div>
+        </div>
+        <div class="step reveal">
+          <div class="date">12–15</div>
+          <div class="desc"><strong>Cartagena (3 noites)</strong>: Cidade Amuralhada, Getsemaní, Castillo San Felipe, bate-volta Ilhas do Rosário.</div>
+        </div>
+        <div class="step reveal">
+          <div class="date">15–21</div>
+          <div class="desc"><strong>San Andrés (6 noites)</strong>: volta à ilha (carrinho), Johnny Cay, West View, Cayo Acuario e dias “slow”.</div>
+        </div>
+        <div class="step reveal">
+          <div class="date">21–24/25</div>
+          <div class="desc"><strong>Medellín</strong>: Comuna 13 (tour), Guatapé (Piedra del Peñol), Parque Arví. Retorno 24 noite ou 25 cedo.</div>
+        </div>
+      </div>
+    </section>
 
-<div class="card">
-<h3>Johnny Cay</h3>
-<p>Ilha paradisíaca no mar das sete cores.</p>
-</div>
+    <section class="section" id="cartagena">
+      <h2 class="reveal">Cartagena</h2>
+      <p class="lead reveal">Colonial, vibrante e perfeita para caminhar sem pressa. Ideal separar um dia inteiro para as ilhas.</p>
 
-<div class="card">
-<h3>West View & Cayo Acuario</h3>
-<p>Snorkel e águas cristalinas.</p>
-</div>
+      <div class="grid-2">
+        <div class="card reveal">
+          <h3>12/abr — Chegada & Cidade Amuralhada <span class="meta">tarde/noite</span></h3>
+          <ul>
+            <li>Check-in e caminhada leve</li>
+            <li>Plaza Santo Domingo • Torre del Reloj</li>
+            <li>Pôr do sol: Café del Mar (ou similar)</li>
+          </ul>
+        </div>
 
-</section>
+        <div class="card reveal">
+          <h3>13/abr — História & Getsemaní <span class="meta">dia</span></h3>
+          <ul>
+            <li>Castillo San Felipe</li>
+            <li>Convento La Popa</li>
+            <li>Getsemaní (arte urbana + bares)</li>
+          </ul>
+        </div>
 
-<section id="medellin">
-<h2>Medellín (21–24/25 Abril)</h2>
+        <div class="card reveal">
+          <h3>14/abr — Ilhas do Rosário <span class="meta">dia</span></h3>
+          <ul>
+            <li>Passeio de lancha (evite horários “corridos”)</li>
+            <li>Snorkel + beach club</li>
+            <li>Volta cedo para jantar tranquilo</li>
+          </ul>
+        </div>
 
-<div class="card">
-<h3>Comuna 13</h3>
-<p>Arte urbana e transformação cultural.</p>
-</div>
+        <div class="card reveal">
+          <h3>15/abr — Voo para San Andrés <span class="meta">manhã</span></h3>
+          <ul>
+            <li>Transfer com folga</li>
+            <li>Check-in e praia central à tarde</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-<div class="card">
-<h3>Guatapé & El Peñón</h3>
-<p>Subida à pedra e cidade colorida.</p>
-</div>
+    <section class="section" id="sanandres">
+      <h2 class="reveal">San Andrés</h2>
+      <p class="lead reveal">Mar das sete cores, snorkeling e dias de relax. Vale deixar 1 dia “coringa” para clima/passeios.</p>
 
-<div class="card">
-<h3>Parque Arví</h3>
-<p>Natureza nas montanhas andinas.</p>
-</div>
+      <div class="grid-2">
+        <div class="card reveal">
+          <h3>16/abr — Volta à ilha <span class="meta">dia</span></h3>
+          <ul>
+            <li>Alugar carrinho e dar a volta</li>
+            <li>Paradas: West View • Piscinita</li>
+            <li>Fim de tarde: pôr do sol</li>
+          </ul>
+        </div>
 
-</section>
+        <div class="card reveal">
+          <h3>17/abr — Johnny Cay <span class="meta">dia</span></h3>
+          <ul>
+            <li>Saída cedo para pegar a ilha vazia</li>
+            <li>Snorkel e fotos</li>
+            <li>Voltar antes do pico de gente</li>
+          </ul>
+        </div>
 
-<section id="mapa" class="alt">
-<h2>Mapa da Viagem</h2>
-<iframe src="https://www.google.com/maps/embed?pb=!1m18..."></iframe>
-</section>
+        <div class="card reveal">
+          <h3>18/abr — Cayo Acuario <span class="meta">meio período</span></h3>
+          <ul>
+            <li>Água transparente e banco de areia</li>
+            <li>Combine com tarde relax na praia</li>
+          </ul>
+        </div>
 
-<footer>
-Colômbia 2026 • Nossa Jornada
-</footer>
+        <div class="card reveal">
+          <h3>19–20/abr — Slow days <span class="meta">livre</span></h3>
+          <ul>
+            <li>Paddle / massagem / fotos</li>
+            <li>Dia coringa para remarcar passeio</li>
+          </ul>
+        </div>
+
+        <div class="card reveal" style="grid-column: 1 / -1;">
+          <h3>21/abr — Voo para Medellín <span class="meta">manhã/tarde</span></h3>
+          <ul>
+            <li>Chegada + check-in em El Poblado (base prática)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="medellin">
+      <h2 class="reveal">Medellín</h2>
+      <p class="lead reveal">Cidade gostosa, cafés ótimos e passeios memoráveis. Guatapé costuma ser o “uau” da viagem.</p>
+
+      <div class="grid-2">
+        <div class="card reveal">
+          <h3>22/abr — Comuna 13 <span class="meta">dia</span></h3>
+          <ul>
+            <li>Tour guiado (vale muito)</li>
+            <li>Grafites + escadas rolantes</li>
+            <li>Café especial colombiano</li>
+          </ul>
+        </div>
+
+        <div class="card reveal">
+          <h3>23/abr — Guatapé & Piedra del Peñol <span class="meta">dia</span></h3>
+          <ul>
+            <li>Subida no Peñol</li>
+            <li>Centro colorido + passeio de barco</li>
+          </ul>
+        </div>
+
+        <div class="card reveal">
+          <h3>24/abr — Parque Arví <span class="meta">meio período</span></h3>
+          <ul>
+            <li>Teleférico + trilhas leves</li>
+            <li>Volta para arrumar malas</li>
+          </ul>
+        </div>
+
+        <div class="card reveal">
+          <h3>Retorno ao Brasil <span class="meta">24 noite ou 25 cedo</span></h3>
+          <ul>
+            <li>Planejar transfer + chegada ao aeroporto com folga</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="mapa">
+      <h2 class="reveal">Mapa</h2>
+      <p class="lead reveal">Aqui é onde você vai incorporar o seu mapa (My Maps) com hotéis, restaurantes e pontos. Por enquanto, deixei um embed padrão.</p>
+
+      <div class="map-wrap reveal">
+        <!-- Troque este iframe pelo embed do seu Google My Maps (recomendado) -->
+        <iframe
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed?pb=!1m12!1m3!1d62786.34890575362!2d-75.561053!3d10.402606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1">
+        </iframe>
+      </div>
+
+      <div class="card reveal" style="margin-top:14px;">
+        <h3>Como colocar seu mapa em 1 minuto <span class="meta">recomendado</span></h3>
+        <ul>
+          <li>Abra Google My Maps → crie “Colômbia 2026”</li>
+          <li>Adicione pontos (hotéis, restaurantes, passeios)</li>
+          <li>Compartilhar → “Qualquer pessoa com o link”</li>
+          <li>No menu ⋮ do mapa → “Incorporar no meu site”</li>
+          <li>Copie o iframe e cole aqui no lugar do iframe acima</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="orcamento">
+      <h2 class="reveal">Orçamento (casal)</h2>
+      <p class="lead reveal">Preencha valores aproximados e o site calcula total e média por dia. (Fica salvo no seu navegador.)</p>
+
+      <div class="budget">
+        <div class="card reveal">
+          <p class="small">Total estimado</p>
+          <p class="big" id="total">R$ —</p>
+          <p class="small" id="avg">— por dia</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="row">
+            <div>
+              <strong>Voos</strong><div class="small">internacional + internos</div>
+            </div>
+            <input inputmode="decimal" id="b_flights" placeholder="Ex: 12000" />
+          </div>
+          <div class="row">
+            <div>
+              <strong>Hospedagem</strong><div class="small">todas as noites</div>
+            </div>
+            <input inputmode="decimal" id="b_hotels" placeholder="Ex: 16000" />
+          </div>
+          <div class="row">
+            <div>
+              <strong>Passeios</strong><div class="small">ilhas, guatapé, tours</div>
+            </div>
+            <input inputmode="decimal" id="b_tours" placeholder="Ex: 5000" />
+          </div>
+          <div class="row">
+            <div>
+              <strong>Comidas</strong><div class="small">almoço/jantar/drinks</div>
+            </div>
+            <input inputmode="decimal" id="b_food" placeholder="Ex: 6000" />
+          </div>
+          <div class="row">
+            <div>
+              <strong>Extras</strong><div class="small">uber, chip, presentes</div>
+            </div>
+            <input inputmode="decimal" id="b_extra" placeholder="Ex: 2500" />
+          </div>
+          <p class="small">Dica: use números sem ponto. Ex: 12500.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="checklist">
+      <h2 class="reveal">Checklist</h2>
+      <p class="lead reveal">Marque o que já está resolvido. (Fica salvo no seu navegador.)</p>
+
+      <div class="checklist">
+        <label class="ck reveal"><input type="checkbox" data-key="ck_passaporte"> Passaporte válido + cópias (PDF no celular)</label>
+        <label class="ck reveal"><input type="checkbox" data-key="ck_seguro"> Seguro viagem contratado</label>
+        <label class="ck reveal"><input type="checkbox" data-key="ck_esim"> eSIM / chip internacional configurado</label>
+        <label class="ck reveal"><input type="checkbox" data-key="ck_cartoes"> Cartões habilitados + aviso de viagem</label>
+        <label class="ck reveal"><input type="checkbox" data-key="ck_cambio"> Câmbio / pesos colombianos (ou plano de saque)</label>
+        <label class="ck reveal"><input type="checkbox" data-key="ck_voos"> Check-in e confirmação de voos</label>
+        <label class="ck reveal"><input type="checkbox" data-key="ck_hoteis"> Hotéis confirmados (endereços salvos)</label>
+        <label class="ck reveal"><input type="checkbox" data-key="ck_malas"> Mala: protetor solar, repelente, remédios</label>
+        <label class="ck reveal"><input type="checkbox" data-key="ck_rota"> Mapa (My Maps) pronto com pontos favoritos</label>
+        <label class="ck reveal"><input type="checkbox" data-key="ck_reservas"> Reservas principais feitas (restaurantes/passeios)</label>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Feito para a nossa viagem • Colômbia 2026 • GitHub Pages
+  </footer>
+
+  <script>
+    // ====== Countdown ======
+    // Ajuste aqui a data/horário alvo do "início" (saída do Brasil).
+    // Use fuso de São Paulo como referência.
+    const target = new Date("2026-04-11T08:00:00-03:00").getTime(); // troque o horário se quiser
+
+    function pad(n){ return String(n).padStart(2,'0'); }
+
+    function tick(){
+      const now = Date.now();
+      let diff = target - now;
+      if(diff < 0) diff = 0;
+
+      const sec = Math.floor(diff/1000);
+      const days = Math.floor(sec/86400);
+      const hours = Math.floor((sec%86400)/3600);
+      const mins = Math.floor((sec%3600)/60);
+      const secs = sec%60;
+
+      document.getElementById("dd").textContent = days;
+      document.getElementById("hh").textContent = pad(hours);
+      document.getElementById("mm").textContent = pad(mins);
+      document.getElementById("ss").textContent = pad(secs);
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    // ====== Reveal on scroll (IntersectionObserver) ======
+    const obs = new IntersectionObserver((entries)=>{
+      for(const e of entries){
+        if(e.isIntersecting) e.target.classList.add("visible");
+      }
+    }, {threshold: 0.12});
+
+    document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
+
+    // ====== Budget (localStorage) ======
+    const keys = ["b_flights","b_hotels","b_tours","b_food","b_extra"];
+    const daysTrip = 14; // 11 a 25 = 14 dias (ajuste se quiser contar diferente)
+
+    function parseBR(v){
+      if(!v) return 0;
+      // remove tudo que não é dígito
+      const cleaned = String(v).replace(/[^\d]/g,"");
+      return cleaned ? Number(cleaned) : 0;
+    }
+
+    function formatBR(n){
+      try { return n.toLocaleString('pt-BR'); }
+      catch { return String(n); }
+    }
+
+    function saveBudget(){
+      const data = {};
+      keys.forEach(k=> data[k] = document.getElementById(k).value);
+      localStorage.setItem("colombia2026_budget", JSON.stringify(data));
+    }
+
+    function loadBudget(){
+      const raw = localStorage.getItem("colombia2026_budget");
+      if(!raw) return;
+      try{
+        const data = JSON.parse(raw);
+        keys.forEach(k=>{
+          if(typeof data[k] === "string") document.getElementById(k).value = data[k];
+        });
+      }catch(e){}
+    }
+
+    function calcBudget(){
+      const sum = keys.reduce((acc,k)=> acc + parseBR(document.getElementById(k).value), 0);
+      document.getElementById("total").textContent = "R$ " + formatBR(sum);
+      const avg = sum / daysTrip;
+      document.getElementById("avg").textContent = "≈ R$ " + formatBR(Math.round(avg)) + " por dia";
+      saveBudget();
+    }
+
+    loadBudget();
+    keys.forEach(k=> document.getElementById(k).addEventListener("input", calcBudget));
+    calcBudget();
+
+    // ====== Checklist (localStorage) ======
+    function loadChecks(){
+      document.querySelectorAll('input[type="checkbox"][data-key]').forEach(cb=>{
+        const k = cb.dataset.key;
+        const val = localStorage.getItem("colombia2026_"+k);
+        cb.checked = (val === "1");
+        cb.addEventListener("change", ()=>{
+          localStorage.setItem("colombia2026_"+k, cb.checked ? "1" : "0");
+        });
+      });
+    }
+    loadChecks();
+  </script>
 
 </body>
 </html>
